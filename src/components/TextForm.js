@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-
+import PropTypes from "prop-types";
 export default function TextForm(props) {
 
 const handleUpClick = ()=>{
@@ -24,24 +24,23 @@ setText(event.target.value);
   const [text, setText ] = useState('');
 
   return (
-    <>
-   <div className="container">
-    <h1>{props.heading}</h1>
-<div className="mb-3">
- 
-  <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
-</div>
-<button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to Uppercase</button>
-<button className="btn btn-primary mx-1" onClick={handleLoClick}>Convert to Lowercase</button>
-<button className="btn btn-primary mx-1" onClick={handleClearClick}>Clear text</button>
-</div> 
+<>
+      <div className={`container bg-${props.Mode === 'dark' ? 'dark' : 'light'}`}>
+        <h1>{props.heading}</h1>
+        <div className="mb-3">
+          <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+        </div>
+        <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to Uppercase</button>
+        <button className="btn btn-primary mx-1" onClick={handleLoClick}>Convert to Lowercase</button>
+        <button className="btn btn-primary mx-1" onClick={handleClearClick}>Clear text</button>
+      </div>
 
-<div className="container my-3 ">
-  <h3>Your Text Summary</h3>
-  <p>{text.split(" ").length} Words  {text.length} and Characters</p>
-  <p>{0.008 *text.split(" ").length} Minutes read </p>
-</div>
-</>
+      <div className={`container my-3 text-${props.Mode === 'light' ? 'dark' : 'light'}`}>
+        <h3>Your Text Summary</h3>
+        <p>{text.split(" ").length} Words {text.length} Characters</p>
+        <p>{0.008 * text.split(" ").length} Minutes read</p>
+      </div>
+    </>
   )
 }
 
